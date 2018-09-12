@@ -4,16 +4,6 @@ namespace DisableBuilder;
 app()->load->library('cc_html');
 
 
-app()->cc_html->registerScriptFileBottom("
-    
-    $(function(){
-        $('.switch-button').switchButton({
-            labels_placement: 'right'
-        });
-    });
-
- ", 'script');
-
 app()->cc_html->registerHtmlFileBottom('
 
         <div class="modal fade" id="modal-restore">
@@ -80,10 +70,7 @@ cicool()->addTabSetting([
 ->settingBeforeSave(function($form){
 })
 ->settingOnSave(function($ci){
-    set_option('enable_api_builder', $ci->input->post('enable_api_builder'));
-    set_option('enable_crud_builder', $ci->input->post('enable_crud_builder'));
-    set_option('enable_form_builder', $ci->input->post('enable_form_builder'));
-    set_option('enable_page_builder', $ci->input->post('enable_page_builder'));
+   
 });
 
 app()->load->library('aauth');
@@ -139,9 +126,9 @@ cicool()->onRoute('utils/act/restore', 'post', function(){
 
 
 
-if(!defined('EXNAME')) define('EXNAME', basename(__DIR__));
+if(!defined('EXNAMEBRD')) define('EXNAMEBRD', basename(__DIR__));
 if ($ccExtension->actived()) {
-   app()->cc_app->onEvent('extension_info_'.EXNAME, function(){
+   app()->cc_app->onEvent('extension_info_'.EXNAMEBRD, function(){
     echo '<div class="callout callout-warning-cc ">go to page '.anchor('administrator/setting/?tab=tab_backup_restore_db', 'setting', ['class' => 'btn btn-xs btn-info btn-flat']).' for configuration</div>';
     });
 }
